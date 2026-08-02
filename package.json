@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-rankparse",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "n8n community node for RankParse - backlinks, domain authority, tech stack, page SEO, and site health from Common Crawl data",
   "keywords": [
     "n8n-community-node-package"
@@ -9,7 +9,7 @@
   "homepage": "https://rankparse.com",
   "author": {
     "name": "RankParse",
-    "email": "support@rankparse.com"
+    "email": "hello@rankparse.com"
   },
   "repository": {
     "type": "git",
