@@ -1,0 +1,54 @@
+{
+  "name": "n8n-nodes-rankparse",
+  "version": "0.1.0",
+  "description": "n8n community node for RankParse - backlinks, domain authority, tech stack, page SEO, and site health from Common Crawl data",
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "license": "MIT",
+  "homepage": "https://rankparse.com",
+  "author": {
+    "name": "RankParse",
+    "email": "support@rankparse.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rankparse/n8n-nodes-rankparse.git"
+  },
+  "engines": {
+    "node": ">=20.15"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && gulp build:icons",
+    "dev": "tsc -p tsconfig.json --watch",
+    "format": "prettier nodes credentials --write",
+    "lint": "eslint \"nodes/**/*.ts\" \"credentials/**/*.ts\" package.json",
+    "lintfix": "eslint \"nodes/**/*.ts\" \"credentials/**/*.ts\" package.json --fix",
+    "prepublishOnly": "npm run build && npm run lint"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/RankParseApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/RankParse/RankParse.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.0",
+    "gulp": "^4.0.2",
+    "jsonc-eslint-parser": "^3.1.0",
+    "n8n-workflow": "^2.16.0",
+    "prettier": "^3.3.0",
+    "typescript": "^5.6.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
