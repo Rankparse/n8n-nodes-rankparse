@@ -47,15 +47,21 @@ export function limitField(
   operations: string[],
   options: { default?: number; maxValue?: number } = {},
 ): INodeProperties {
-  const { default: defaultValue = 50, maxValue = 1000 } = options;
-  return {
+  const { maxValue = 1000 } = options;
+  const field: INodeProperties = {
     displayName: "Limit",
     name: "limit",
     type: "number",
-    default: defaultValue,
+    default: 50,
     typeOptions: { minValue: 1, maxValue },
     description: "Max number of results to return",
     displayOptions: { show: { resource: [resource], operation: operations } },
     routing: { request: { qs: { limit: "={{$value}}" } } },
   };
+
+  if (options.default !== undefined) {
+    field.default = options.default;
+  }
+
+  return field;
 }
