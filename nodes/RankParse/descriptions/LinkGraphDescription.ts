@@ -1,151 +1,256 @@
-import type { INodeProperties } from 'n8n-workflow';
-import { domainField, limitField } from './SharedFields';
+import type { INodeProperties } from "n8n-workflow";
+import { domainField, limitField } from "./SharedFields";
 
-const RESOURCE = 'linkGraph';
+const RESOURCE = "linkGraph";
 
 export const linkGraphOperations: INodeProperties[] = [
-	{
-		displayName: 'Operation',
-		name: 'operation',
-		type: 'options',
-		noDataExpression: true,
-		default: 'backlinks',
-		displayOptions: { show: { resource: [RESOURCE] } },
-		options: [
-			{
-				name: 'Backlinks',
-				value: 'backlinks',
-				description: 'Get backlinks pointing to a domain (2 credits, 3 with Score enabled)',
-				action: 'Get backlinks for a domain',
-				routing: { request: { method: 'GET', url: '/v1/backlinks' }, output: { postReceive: [{ type: 'rootProperty', properties: { property: 'data' } }] } },
-			},
-			{
-				name: 'Referring Domains',
-				value: 'referringDomains',
-				description: 'Get domains that link to a domain, with dofollow/nofollow counts (2 credits, 3 with Score enabled)',
-				action: 'Get referring domains for a domain',
-				routing: { request: { method: 'GET', url: '/v1/referring-domains' }, output: { postReceive: [{ type: 'rootProperty', properties: { property: 'data' } }] } },
-			},
-			{
-				name: 'Outbound Links',
-				value: 'outboundLinks',
-				description: 'Get external links going out from a domain (2 credits)',
-				action: 'Get outbound links for a domain',
-				routing: { request: { method: 'GET', url: '/v1/outbound-links' }, output: { postReceive: [{ type: 'rootProperty', properties: { property: 'data' } }] } },
-			},
-			{
-				name: 'Anchor Text',
-				value: 'anchorText',
-				description: 'Get anchor text distribution for links pointing to a domain (2 credits)',
-				action: 'Get anchor text distribution for a domain',
-				routing: { request: { method: 'GET', url: '/v1/anchor-text' }, output: { postReceive: [{ type: 'rootProperty', properties: { property: 'data' } }] } },
-			},
-			{
-				name: 'Link Intersect',
-				value: 'linkIntersect',
-				description: 'Find domains that link to both of two target domains (5 credits)',
-				action: 'Find domains linking to two domains',
-				routing: { request: { method: 'GET', url: '/v1/link-intersect' }, output: { postReceive: [{ type: 'rootProperty', properties: { property: 'data' } }] } },
-			},
-			{
-				name: 'Link Velocity',
-				value: 'linkVelocity',
-				description: 'Link velocity over time (0 credits - v1 stub, returns "not_yet_available")',
-				action: 'Get link velocity for a domain',
-				routing: { request: { method: 'GET', url: '/v1/link-velocity' }, output: { postReceive: [{ type: 'rootProperty', properties: { property: 'data' } }] } },
-			},
-			{
-				name: 'New Links',
-				value: 'newLinks',
-				description: 'Recently gained backlinks (0 credits - v1 stub, returns "not_yet_available")',
-				action: 'Get new links for a domain',
-				routing: { request: { method: 'GET', url: '/v1/new-links' }, output: { postReceive: [{ type: 'rootProperty', properties: { property: 'data' } }] } },
-			},
-			{
-				name: 'Lost Links',
-				value: 'lostLinks',
-				description: 'Recently lost backlinks (0 credits - v1 stub, returns "not_yet_available")',
-				action: 'Get lost links for a domain',
-				routing: { request: { method: 'GET', url: '/v1/lost-links' }, output: { postReceive: [{ type: 'rootProperty', properties: { property: 'data' } }] } },
-			},
-		],
-	},
+  {
+    displayName: "Operation",
+    name: "operation",
+    type: "options",
+    noDataExpression: true,
+    default: "backlinks",
+    displayOptions: { show: { resource: [RESOURCE] } },
+    options: [
+      {
+        name: "Anchor Text",
+        value: "anchorText",
+        description:
+          "Get anchor text distribution for links pointing to a domain (2 credits)",
+        action: "Get anchor text distribution for a domain",
+        routing: {
+          request: { method: "GET", url: "/v1/anchor-text" },
+          output: {
+            postReceive: [
+              { type: "rootProperty", properties: { property: "data" } },
+            ],
+          },
+        },
+      },
+      {
+        name: "Backlinks",
+        value: "backlinks",
+        description:
+          "Get backlinks pointing to a domain (2 credits, 3 with Score enabled)",
+        action: "Get backlinks for a domain",
+        routing: {
+          request: { method: "GET", url: "/v1/backlinks" },
+          output: {
+            postReceive: [
+              { type: "rootProperty", properties: { property: "data" } },
+            ],
+          },
+        },
+      },
+      {
+        name: "Link Intersect",
+        value: "linkIntersect",
+        description:
+          "Find domains that link to both of two target domains (5 credits)",
+        action: "Find domains linking to two domains",
+        routing: {
+          request: { method: "GET", url: "/v1/link-intersect" },
+          output: {
+            postReceive: [
+              { type: "rootProperty", properties: { property: "data" } },
+            ],
+          },
+        },
+      },
+      {
+        name: "Link Velocity",
+        value: "linkVelocity",
+        description:
+          'Link velocity over time (0 credits - v1 stub, returns "not_yet_available")',
+        action: "Get link velocity for a domain",
+        routing: {
+          request: { method: "GET", url: "/v1/link-velocity" },
+          output: {
+            postReceive: [
+              { type: "rootProperty", properties: { property: "data" } },
+            ],
+          },
+        },
+      },
+      {
+        name: "Lost Links",
+        value: "lostLinks",
+        description:
+          'Recently lost backlinks (0 credits - v1 stub, returns "not_yet_available")',
+        action: "Get lost links for a domain",
+        routing: {
+          request: { method: "GET", url: "/v1/lost-links" },
+          output: {
+            postReceive: [
+              { type: "rootProperty", properties: { property: "data" } },
+            ],
+          },
+        },
+      },
+      {
+        name: "New Links",
+        value: "newLinks",
+        description:
+          'Recently gained backlinks (0 credits - v1 stub, returns "not_yet_available")',
+        action: "Get new links for a domain",
+        routing: {
+          request: { method: "GET", url: "/v1/new-links" },
+          output: {
+            postReceive: [
+              { type: "rootProperty", properties: { property: "data" } },
+            ],
+          },
+        },
+      },
+      {
+        name: "Outbound Links",
+        value: "outboundLinks",
+        description: "Get external links going out from a domain (2 credits)",
+        action: "Get outbound links for a domain",
+        routing: {
+          request: { method: "GET", url: "/v1/outbound-links" },
+          output: {
+            postReceive: [
+              { type: "rootProperty", properties: { property: "data" } },
+            ],
+          },
+        },
+      },
+      {
+        name: "Referring Domains",
+        value: "referringDomains",
+        description:
+          "Get domains that link to a domain, with dofollow/nofollow counts (2 credits, 3 with Score enabled)",
+        action: "Get referring domains for a domain",
+        routing: {
+          request: { method: "GET", url: "/v1/referring-domains" },
+          output: {
+            postReceive: [
+              { type: "rootProperty", properties: { property: "data" } },
+            ],
+          },
+        },
+      },
+    ],
+  },
 ];
 
 export const linkGraphFields: INodeProperties[] = [
-	domainField(RESOURCE, ['backlinks', 'referringDomains', 'outboundLinks', 'anchorText']),
-	domainField(RESOURCE, ['linkVelocity', 'newLinks', 'lostLinks'], { required: false }),
-	limitField(RESOURCE, ['backlinks', 'referringDomains', 'outboundLinks', 'anchorText']),
-	limitField(RESOURCE, ['linkIntersect'], { default: 100 }),
-	{
-		displayName: 'Score',
-		name: 'score',
-		type: 'boolean',
-		default: false,
-		description: 'Whether to enable derived score enrichment on each row. Adds 1 credit to the base cost.',
-		displayOptions: { show: { resource: [RESOURCE], operation: ['backlinks', 'referringDomains'] } },
-		routing: { request: { qs: { score: '={{$value}}' } } },
-	},
-	{
-		displayName: 'Sort',
-		name: 'sort',
-		type: 'options',
-		default: 'importance',
-		options: [
-			{ name: 'Importance', value: 'importance', description: 'Aggregated referrer rows ordered by domain authority' },
-			{ name: 'Recent', value: 'recent', description: 'URL-level backlink rows ordered by crawl recency' },
-		],
-		description: 'How to order and shape backlink results',
-		displayOptions: { show: { resource: [RESOURCE], operation: ['backlinks'] } },
-		routing: { request: { qs: { sort: '={{$value}}' } } },
-	},
-	{
-		displayName: 'Additional Fields',
-		name: 'additionalFields',
-		type: 'collection',
-		placeholder: 'Add Field',
-		default: {},
-		displayOptions: { show: { resource: [RESOURCE], operation: ['backlinks'] } },
-		options: [
-			{
-				displayName: 'From Domain',
-				name: 'fromDomain',
-				type: 'string',
-				default: '',
-				description: 'Optional exact source-domain filter',
-				routing: { send: { property: 'from_domain', type: 'query', value: '={{$value}}' } },
-			},
-			{
-				displayName: 'Link Type',
-				name: 'linkType',
-				type: 'string',
-				default: '',
-				placeholder: 'hyperlink',
-				description: 'Optional link type filter, e.g. "hyperlink" or "image"',
-				routing: { send: { property: 'link_type', type: 'query', value: '={{$value}}' } },
-			},
-		],
-	},
-	{
-		displayName: 'Domain A',
-		name: 'domainA',
-		type: 'string',
-		default: '',
-		required: true,
-		placeholder: 'example.com',
-		description: 'First domain to compare',
-		displayOptions: { show: { resource: [RESOURCE], operation: ['linkIntersect'] } },
-		routing: { request: { qs: { domain_a: '={{$value}}' } } },
-	},
-	{
-		displayName: 'Domain B',
-		name: 'domainB',
-		type: 'string',
-		default: '',
-		required: true,
-		placeholder: 'competitor.com',
-		description: 'Second domain to compare',
-		displayOptions: { show: { resource: [RESOURCE], operation: ['linkIntersect'] } },
-		routing: { request: { qs: { domain_b: '={{$value}}' } } },
-	},
+  domainField(RESOURCE, [
+    "backlinks",
+    "referringDomains",
+    "outboundLinks",
+    "anchorText",
+  ]),
+  domainField(RESOURCE, ["linkVelocity", "newLinks", "lostLinks"], {
+    required: false,
+  }),
+  limitField(RESOURCE, [
+    "backlinks",
+    "referringDomains",
+    "outboundLinks",
+    "anchorText",
+  ]),
+  limitField(RESOURCE, ["linkIntersect"], { default: 100 }),
+  {
+    displayName: "Score",
+    name: "score",
+    type: "boolean",
+    default: false,
+    description:
+      "Whether to enable derived score enrichment on each row. Adds 1 credit to the base cost.",
+    displayOptions: {
+      show: {
+        resource: [RESOURCE],
+        operation: ["backlinks", "referringDomains"],
+      },
+    },
+    routing: { request: { qs: { score: "={{$value}}" } } },
+  },
+  {
+    displayName: "Sort",
+    name: "sort",
+    type: "options",
+    default: "importance",
+    options: [
+      {
+        name: "Importance",
+        value: "importance",
+        description: "Aggregated referrer rows ordered by domain authority",
+      },
+      {
+        name: "Recent",
+        value: "recent",
+        description: "URL-level backlink rows ordered by crawl recency",
+      },
+    ],
+    description: "How to order and shape backlink results",
+    displayOptions: {
+      show: { resource: [RESOURCE], operation: ["backlinks"] },
+    },
+    routing: { request: { qs: { sort: "={{$value}}" } } },
+  },
+  {
+    displayName: "Additional Fields",
+    name: "additionalFields",
+    type: "collection",
+    placeholder: "Add Field",
+    default: {},
+    displayOptions: {
+      show: { resource: [RESOURCE], operation: ["backlinks"] },
+    },
+    options: [
+      {
+        displayName: "From Domain",
+        name: "fromDomain",
+        type: "string",
+        default: "",
+        description: "Optional exact source-domain filter",
+        routing: {
+          send: {
+            property: "from_domain",
+            type: "query",
+            value: "={{$value}}",
+          },
+        },
+      },
+      {
+        displayName: "Link Type",
+        name: "linkType",
+        type: "string",
+        default: "",
+        placeholder: "hyperlink",
+        description: 'Optional link type filter, e.g. "hyperlink" or "image"',
+        routing: {
+          send: { property: "link_type", type: "query", value: "={{$value}}" },
+        },
+      },
+    ],
+  },
+  {
+    displayName: "Domain A",
+    name: "domainA",
+    type: "string",
+    default: "",
+    required: true,
+    placeholder: "example.com",
+    description: "First domain to compare",
+    displayOptions: {
+      show: { resource: [RESOURCE], operation: ["linkIntersect"] },
+    },
+    routing: { request: { qs: { domain_a: "={{$value}}" } } },
+  },
+  {
+    displayName: "Domain B",
+    name: "domainB",
+    type: "string",
+    default: "",
+    required: true,
+    placeholder: "competitor.com",
+    description: "Second domain to compare",
+    displayOptions: {
+      show: { resource: [RESOURCE], operation: ["linkIntersect"] },
+    },
+    routing: { request: { qs: { domain_b: "={{$value}}" } } },
+  },
 ];

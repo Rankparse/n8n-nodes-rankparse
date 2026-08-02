@@ -1,43 +1,50 @@
 import type {
-	IAuthenticateGeneric,
-	ICredentialTestRequest,
-	ICredentialType,
-	INodeProperties,
-} from 'n8n-workflow';
+  IAuthenticateGeneric,
+  ICredentialTestRequest,
+  ICredentialType,
+  INodeProperties,
+  Icon,
+} from "n8n-workflow";
 
 export class RankParseApi implements ICredentialType {
-	name = 'rankParseApi';
+  name = "rankParseApi";
 
-	displayName = 'RankParse API';
+  displayName = "RankParse API";
 
-	documentationUrl = 'https://rankparse.com/docs';
+  icon: Icon = {
+    light: "file:../nodes/RankParse/rankparse.svg",
+    dark: "file:../nodes/RankParse/rankparse.dark.svg",
+  };
 
-	properties: INodeProperties[] = [
-		{
-			displayName: 'API Key',
-			name: 'apiKey',
-			type: 'string',
-			typeOptions: { password: true },
-			default: '',
-			required: true,
-			description: 'Your RankParse API key (starts with "rp_"). Find it at https://rankparse.com/dashboard/keys.',
-		},
-	];
+  documentationUrl = "https://rankparse.com/docs";
 
-	authenticate: IAuthenticateGeneric = {
-		type: 'generic',
-		properties: {
-			headers: {
-				'X-API-Key': '={{$credentials.apiKey}}',
-			},
-		},
-	};
+  properties: INodeProperties[] = [
+    {
+      displayName: "API Key",
+      name: "apiKey",
+      type: "string",
+      typeOptions: { password: true },
+      default: "",
+      required: true,
+      description:
+        'Your RankParse API key (starts with "rp_"). Find it at https://rankparse.com/dashboard/keys.',
+    },
+  ];
 
-	test: ICredentialTestRequest = {
-		request: {
-			baseURL: 'https://api.rankparse.com',
-			url: '/v1/credits',
-			method: 'GET',
-		},
-	};
+  authenticate: IAuthenticateGeneric = {
+    type: "generic",
+    properties: {
+      headers: {
+        "X-API-Key": "={{$credentials.apiKey}}",
+      },
+    },
+  };
+
+  test: ICredentialTestRequest = {
+    request: {
+      baseURL: "https://api.rankparse.com",
+      url: "/v1/credits",
+      method: "GET",
+    },
+  };
 }
