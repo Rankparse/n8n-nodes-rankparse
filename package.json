@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-rankparse",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "n8n community node for RankParse - backlinks, domain authority, tech stack, page SEO, and site health from Common Crawl data",
   "keywords": [
     "n8n-community-node-package"
